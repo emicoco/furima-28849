@@ -17,7 +17,7 @@
 - has_many :items
 - has_many :likes
 - has_many :comments
-- has_many :purchase_management
+- has_many :purchase_managements
 
 ## itemsテーブル
 
@@ -45,6 +45,7 @@
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null: false,foreign_key: true|
+|item|references|null: false,foreign_key: true|
 
 ### Association
 - belongs_to :item
@@ -55,6 +56,7 @@
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null: false,foreign_key: true|
+|item|references|null: false,foreign_key: true|
 
 ### Association
 - belongs_to :item
@@ -70,6 +72,7 @@
 |city|string|null: false|
 |address|string|null: false|
 |building_name|string|
+|tel|string|null: false|
 
 ### Association
 -belongs_to :purchase_management
