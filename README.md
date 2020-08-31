@@ -1,6 +1,6 @@
 # README
 
-# usersテーブル
+## usersテーブル
 
 |Column|Type|Options|
 |------|----|-------|
@@ -13,71 +13,73 @@
 |last_name_kana|string|null: false|
 |birthday|date|null: false|
 
-# Association
-- has_many :items,likes.comments
-- belongs_to :buyer,card,comment,item,like
+### Association
+- has_many :items
+- has_many :likes
+- has_many :comments
+- has_one :buyer
+- has_one :purchase_management
 
-
-# itemsテーブル
+## itemsテーブル
 
 |Column|Type|Options|
 |------|----|-------|
 |image|text|null: false|
-|item_name|string|null: false|
+|name|string|null: false|
 |price|integer|null: false|
 |category|string|null: false|
+|description|string|null: false|
 |status|integer|null: false|
 |shipping_origin_area|string|null: false|
 |shipping_days|datetime|null: false|
 |postage|string|null: false|
 |shipping_method|integer|null: false|
 
-# Association
-- has_many :likes,comments
+### Association
+- has_many :likes
+- has_many :comments
 - belongs_to :user
 
 
-＃likesテーブル
+## likesテーブル
 
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null: false,foreign_key: true|
 
-# Association
-- belongs_to :item,user
+### Association
+- belongs_to :item
+- belongs_to :user
 
 
-#commentsテーブル
+## commentsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null: false,foreign_key: true|
 
-# Association
-- belongs_to :item,user
+### Association
+- belongs_to :item
+- belongs_to :user
 
 
-#buyerテーブル
+## buyerテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user|references|null: false,foreign_key: true|
 |post_number|string|null: false|
 |prefecture|integer|null: false|
 |city|string|null: false|
 |address|string|null: false|
 |building_name|string|
 
-# Association
-- has_one :user
+### Association
+- belongs_to :user
 
 
-#cardテーブル
+##purchase_managementテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null: false,foreign_key: true|
-|card_number|string|null: false|
-|year|integer|null: false|
-|month|integer|null: false|
-|security_code|integer|null: false|
+|item|references|null: false,foreign_key: true|
 
-# Association
-- has_one :user
+### Association
+- belongs_to :user
