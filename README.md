@@ -27,19 +27,20 @@
 |image|text|null: false|
 |name|string|null: false|
 |price|integer|null: false|
-|category|string|null: false|
-|description|string|null: false|
+|category|integer|null: false|
+|description|integer|null: false|
 |status|integer|null: false|
-|shipping_origin_area|string|null: false|
-|shipping_days|datetime|null: false|
-|postage|string|null: false|
+|shipping_origin_area|integer|null: false|
+|shipping_days|integer|null: false|
+|postage|integer|null: false|
 |shipping_method|integer|null: false|
 
 ### Association
 - has_many :likes
 - has_many :comments
 - belongs_to :user
-
+- has_one :purchase_management
+- has_one :buyer
 
 ## likesテーブル
 
@@ -62,9 +63,10 @@
 - belongs_to :user
 
 
-## buyerテーブル
+## buyersテーブル
 |Column|Type|Options|
 |------|----|-------|
+|user|references|null: false,foreign_key: true|
 |post_number|string|null: false|
 |prefecture|integer|null: false|
 |city|string|null: false|
@@ -83,3 +85,5 @@
 
 ### Association
 - belongs_to :user
+- belongs_to :item
+- belongs_to :item
