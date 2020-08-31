@@ -17,8 +17,7 @@
 - has_many :items
 - has_many :likes
 - has_many :comments
-- has_one :buyer
-- has_one :purchase_management
+- has_many :purchase_management
 
 ## itemsテーブル
 
@@ -28,7 +27,7 @@
 |name|string|null: false|
 |price|integer|null: false|
 |category|integer|null: false|
-|description|integer|null: false|
+|description|text|null: false|
 |status|integer|null: false|
 |shipping_origin_area|integer|null: false|
 |shipping_days|integer|null: false|
@@ -40,7 +39,6 @@
 - has_many :comments
 - belongs_to :user
 - has_one :purchase_management
-- has_one :buyer
 
 ## likesテーブル
 
@@ -66,7 +64,7 @@
 ## buyersテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user|references|null: false,foreign_key: true|
+|purchase_management|references|null: false,foreign_key: true|
 |post_number|string|null: false|
 |prefecture|integer|null: false|
 |city|string|null: false|
@@ -74,8 +72,7 @@
 |building_name|string|
 
 ### Association
-- belongs_to :user
-
+-belongs_to :purchase_management
 
 ##purchase_managementテーブル
 |Column|Type|Options|
@@ -86,4 +83,4 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- belongs_to :item
+- has_one :buyer
