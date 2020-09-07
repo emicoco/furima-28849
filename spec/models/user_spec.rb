@@ -10,8 +10,8 @@ describe User do
         expect(@user).to be_valid
       end
       it "passwordが６文字以上であれば登録できる" do
-        @user.password = "000000"
-        @user.password_confirmation = "000000"
+        @user.password = "hoge22"
+        @user.password_confirmation = "hoge22"
         expect(@user).to be_valid
       end
       
@@ -30,7 +30,7 @@ describe User do
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
       it "emailに@が含まれないと登録できない" do
-        @user.email = "@"
+        @user.email = "kkk:email.com"
         @user.valid?
         expect(@user.errors.full_messages).to include("Email is invalid")
       end
@@ -52,6 +52,12 @@ describe User do
         @user.password_confirmation = "00000"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+      end
+      it "passwordが半角英数混在出ないと登録できない" do
+        @user.password = "あああああ"
+        @user.password_confirmation = "あああああ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it "passwordが存在してもpassword_confirmationが空では登録できない" do
         @user.password_confirmation = ""
@@ -89,12 +95,12 @@ describe User do
         expect(@user.errors.full_messages).to include("Last name kana is invalid")
       end
       it "first_nameが全角（漢字ひらがなカタカナ）以外では登録できない" do
-        @user.first_name = "漢ひカ"
+        @user.first_name = "zenkzku"
         @user.valid?
         expect(@user.errors.full_messages).to include
       end
       it "last_nameが全角（漢字ひらがなカタカナ）以外では登録できない" do
-        @user.last_name = "漢ひカ"
+        @user.last_name = "zenkzku"
         @user.valid?
         expect(@user.errors.full_messages).to include
       end
