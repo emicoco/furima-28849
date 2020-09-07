@@ -29,6 +29,12 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
+      it "emailに@が含まれないと登録できない" do
+        @user.email = "@"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
+      end
+
       it "重複したemailが存在する場合登録できない" do
         @user.save
         another_user = FactoryBot.build(:user)
@@ -62,6 +68,16 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name can't be blank")
       end
+      it "first_name_kanaが空だと登録できない" do
+        @user.first_name_kana = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana can't be blank")
+      end
+      it "last_name_kanaが空だと登録できない" do
+        @user.last_name_kana = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kana can't be blank")
+      end
       it "first_name_kanaがカタカナで返ること" do
         @user.first_name_kana = "kana"
         @user.valid?
@@ -71,6 +87,16 @@ describe User do
         @user.last_name_kana = "kana"
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name kana is invalid")
+      end
+      it "first_nameが全角（漢字ひらがなカタカナ）以外では登録できない" do
+        @user.first_name = "漢ひカ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include
+      end
+      it "last_nameが全角（漢字ひらがなカタカナ）以外では登録できない" do
+        @user.last_name = "漢ひカ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include
       end
       it "生年月日が空では登録できない" do
         @user.birthday = nil
