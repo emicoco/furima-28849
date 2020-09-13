@@ -12,19 +12,24 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_origin_area
   belongs_to_active_hash :shipping_day
 
-  # vzalidates :description, :price, presence: true
-  validates :category_id, numericality: { other_than: 0 }
-  validates :status_id, numericality: { other_than: 0 }
-  validates :shipping_method_id, numericality: { other_than: 0 }
-  validates :shipping_origin_area_id, numericality: { other_than: 0 }
-  validates :shipping_days_id, numericality: { other_than: 0 }
-  validates :price, presence: true
+  with_options numericality: { other_than: 0 } do
+    validates :category_id
+    validates :status_id
+    validates :shipping_method_id
+    validates :shipping_origin_area_id
+    validates :shipping_days_id
+  end
+
+  with_options presence: true do
+    validates :price
+    validates :description
+    validates :user_id
+    validates :name
+    validates :description
+    validates :image
+  end
+
   validates :price, numericality: { only_integer: true }, inclusion: { in: 300..9_999_999 }
-  validates :description, presence: true
-  validates :user_id, presence: true
-  validates :name, presence: true
-  validates :description, presence: true
-  validates :image, presence: true
 
   def was_attached?
     image.attached?
