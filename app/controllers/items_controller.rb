@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.all.order("created_at DESC")
+    @items = Item.all.order('created_at DESC')
   end
 
   def new
@@ -13,6 +13,22 @@ class ItemsController < ApplicationController
       redirect_to root_path
     else
       render 'new'
+    end
+  end
+
+  def show
+    @item = Item.find(params[:id])
+  end
+
+  def edit
+    @item = Item.find(params[:id])
+  end
+
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+    else
+      render 'edit'
     end
   end
 
