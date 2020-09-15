@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :status
   belongs_to_active_hash :shipping_method
   belongs_to_active_hash :shipping_origin_area
-  belongs_to_active_hash :shipping_day
+  belongs_to_active_hash :shipping_days
 
   with_options numericality: { other_than: 0 } do
     validates :category_id
