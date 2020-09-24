@@ -19,8 +19,9 @@ if (document.URL.match( /new/ ) || document.URL.match( /edit/ )) {
       // 生成したHTMLの要素をブラウザに表示させる
       imageElement.appendChild(blobImage);
       ImageList.appendChild(imageElement);
-      console.log(blob);
-      console.log(blobImage);
+    
+      // console.log(blob);
+      // console.log(blobImage);
     });
   });
 }
